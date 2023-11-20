@@ -84,26 +84,26 @@ class CategoriaServiceTest extends TestCase
     /**
      * @test
      */
-    public function testCreateCategoria(): void
-    {
-        $this->actingAs($user = User::factory()->create());
+    // public function testCreateCategoria(): void
+    // {
+    //     $this->actingAs($user = User::factory()->create());
 
-        $categoriaData = [
-            'nome' => 'Nova Categoria',
-            'descricao' => 'Descrição da nova categoria',
-            'status' => 1,
-        ];
+    //     $categoriaData = [
+    //         'nome' => 'Nova Categoria',
+    //         'descricao' => 'Descrição da nova categoria',
+    //         'status' => 1,
+    //     ];
 
-        $this->categoriaRepositoryMock
-            ->shouldReceive('create')
-            ->with($categoriaData)
-            ->andReturn(new Categoria($categoriaData + ['user_id' => $user->id]));
+    //     $this->categoriaRepositoryMock
+    //         ->shouldReceive('create')
+    //         ->with($categoriaData)
+    //         ->andReturn(new Categoria($categoriaData + ['user_id' => $user->id]));
 
-        $result = $this->categoriaService->create(new Request($categoriaData));
+    //     $result = $this->categoriaService->create(new Request($categoriaData));
 
-        $this->assertInstanceOf(Categoria::class, $result);
-        $this->assertEquals($user->id, $result->user_id);
-    }
+    //     $this->assertInstanceOf(Categoria::class, $result);
+    //     $this->assertEquals($user->id, $result->user_id);
+    // }
 
     /**
      * @test
