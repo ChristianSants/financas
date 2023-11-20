@@ -95,7 +95,7 @@ class CategoriaServiceTest extends TestCase
         ];
 
         $this->categoriaRepositoryMock
-            ->shouldReceive('create')
+            ->shouldReceive('create') 
             ->with($categoriaData)
             ->andReturn(new Categoria($categoriaData + ['user_id' => $user->id]));
 
