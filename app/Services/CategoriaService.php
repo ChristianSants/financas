@@ -25,9 +25,9 @@ class CategoriaService
     {
         if( ($categoria = $this->categoriaRepository->find($categoria))
             &&
-            $categoria->user_id == auth()->user()->id 
+            $categoria->user_id == auth()->user()->id
         ){
-            return $categoria;                  
+            return $categoria;
         }
 
         throw new Exception("Categoria do usuário não encontrada!");
@@ -59,7 +59,7 @@ class CategoriaService
             return $this->categoriaRepository->update($categoria, $data);
         }
 
-        return false;        
+        return false;
     }
 
     public function delete(int $categoria): bool
