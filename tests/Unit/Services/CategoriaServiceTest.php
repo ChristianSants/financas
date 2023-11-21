@@ -92,12 +92,13 @@ class CategoriaServiceTest extends TestCase
             'nome' => 'Nova Categoria',
             'descricao' => 'Descrição da nova categoria',
             'status' => 1,
+            'user_id' => $user->id
         ];
 
         $this->categoriaRepositoryMock
             ->shouldReceive('create')
             ->with($categoriaData)
-            ->andReturn(new Categoria($categoriaData + ['user_id' => $user->id]));
+            ->andReturn(Categoria::factory()->create($categoriaData));
 
         $result = $this->categoriaService->create(new Request($categoriaData));
 
