@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\LancamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,24 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/', [CategoriaController::class, 'update'])->name('categorias.update');
 
             Route::delete('/', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
-        });        
+        });
+    });
+
+    //Lancamentos
+    Route::prefix('lancamentos')->group(function () {
+        
+        Route::get('/', [LancamentoController::class, 'index'])->name('lancamentos.index');
+
+        Route::post('/', [LancamentoController::class, 'store'])->name('lancamentos.store');
+
+        Route::group(['prefix' => '{lancamento}'], function () {
+
+            Route::get('/', [LancamentoController::class, 'show'])->name('lancamentos.show');
+            
+            Route::put('/', [LancamentoController::class, 'update'])->name('lancamentos.update');
+
+            Route::delete('/', [LancamentoController::class, 'destroy'])->name('lancamentos.destroy');
+        });
     });
     
 });

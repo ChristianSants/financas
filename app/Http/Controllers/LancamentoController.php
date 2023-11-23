@@ -2,64 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lancamento;
+use App\Services\LancamentoService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LancamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
+    public function __construct(
+        protected LancamentoService $lancamentoService
+    ) {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json([
+            'lancamentos' => $this->lancamentoService->list()
+        ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        return response()->json([
+            'lancamento' => $this->lancamentoService->create($request)
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Lancamento $lancamento)
+    public function show(int $lancamento): JsonResponse
     {
-        //
+        try {
+            $lancamento = $this->lancamentoService->find($lancamento);
+            return response()->json(['lancamento' => $lancamento], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lancamento $lancamento)
+    public function update(Request $request, int $lancamento): JsonResponse
     {
-        //
+        $result = $this->lancamentoService->update($lancamento, $request);
+        if ($result) {
+            return response()->json(['message' => 'Lançamento atualizada com sucesso.'], 200);
+        } else {
+            return response()->json(['error' => 'Algum erro ocorreu.'], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Lancamento $lancamento)
+    public function destroy(int $lancamento): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Lancamento $lancamento)
-    {
-        //
+        $result = $this->lancamentoService->delete($lancamento);
+        if ($result) {
+            return response()->json(['message' => 'Lançamento excluída com sucesso.'], 200);
+        } else {
+            return response()->json(['error' => 'Algum erro ocorreu.'], 500);
+        }
     }
 }
