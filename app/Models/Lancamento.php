@@ -17,10 +17,10 @@ class Lancamento extends Model
         'descricao',
         'status',
         'categoria_id',
-        'usuario_id',
+        'user_id',
     ];
 
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

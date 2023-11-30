@@ -20,11 +20,11 @@ return new class extends Migration
             $table->text('descricao')->nullable();
             $table->enum('status', [0, 1])->default(0);
             $table->unsignedBigInteger('categoria_id');
-            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

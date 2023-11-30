@@ -21,7 +21,7 @@ class LancamentoFactory extends Factory
             'descricao' => $this->faker->text,
             'status' => $this->faker->randomElement([0, 1]),
             'categoria_id' => Categoria::factory(),
-            'usuario_id' => User::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

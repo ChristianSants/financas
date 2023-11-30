@@ -2,24 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Models\Categoria;
+use App\Models\Lancamento;
 use Illuminate\Support\Collection;
 
-class CategoriaRepository
+class LancamentoRepository
 {
     public function listByUser(int $user): Collection
     {
-        return Categoria::where('user_id', $user)->get();
+        return Lancamento::where('user_id', $user)->get();
     }
 
-    public function find($id): ?Categoria
+    public function find($id): ?Lancamento
     {
-        return Categoria::find($id);
+        return Lancamento::find($id);
     }
 
-    public function create($data): ?Categoria
+    public function create($data): ?Lancamento
     {
-        return Categoria::create($data);
+        return Lancamento::create($data);
     }
 
     public function update($id, $data): bool
